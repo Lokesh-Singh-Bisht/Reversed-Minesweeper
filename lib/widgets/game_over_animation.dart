@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reversed_minesweeper/theme.dart';
+import 'package:reversed_minesweeper/widgets/floating_animation_widget.dart';
 
 class GameOverAnimation extends StatefulWidget {
   final int totalDiscoveredBombs;
@@ -100,7 +101,7 @@ class _GameOverAnimationState extends State<GameOverAnimation>
                   child: Text(
                     'GAME',
                     style: GoogleFonts.pressStart2p(
-                      fontSize: 60,
+                      fontSize: 55,
                       color: GameTheme.secondryColor,
                       fontWeight: FontWeight.bold,
                       shadows: const [
@@ -122,7 +123,7 @@ class _GameOverAnimationState extends State<GameOverAnimation>
                   child: Text(
                     'OVER',
                     style: GoogleFonts.pressStart2p(
-                      fontSize: 60,
+                      fontSize: 55,
                       color: GameTheme.secondryColor,
                       fontWeight: FontWeight.bold,
                       shadows: const [
@@ -141,44 +142,46 @@ class _GameOverAnimationState extends State<GameOverAnimation>
               position: _slideAnimation,
               child: Column(
                 children: [
-                  Container(
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                            color: GameTheme.secondryColor, width: 1),
-                        boxShadow: const [
-                          BoxShadow(
-                              color: GameTheme.secondryColor,
-                              blurRadius: 12,
-                              spreadRadius: 5,
-                              offset: Offset(0, 0)),
-                        ],
-                      ),
-                      child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Bombs Discovered\n',
-                                style: GoogleFonts.russoOne(
-                                  fontSize: 18,
-                                  color: GameTheme.primaryColor,
+                  FloatingAnimationWidget(
+                    child: Container(
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                              color: GameTheme.secondryColor, width: 1),
+                          boxShadow: const [
+                            BoxShadow(
+                                color: GameTheme.secondryColor,
+                                blurRadius: 12,
+                                spreadRadius: 5,
+                                offset: Offset(0, 0)),
+                          ],
+                        ),
+                        child: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Bombs Discovered\n',
+                                  style: GoogleFonts.russoOne(
+                                    fontSize: 18,
+                                    color: GameTheme.primaryColor,
+                                  ),
                                 ),
-                              ),
-                              TextSpan(
-                                text: "${widget.totalDiscoveredBombs}",
-                                style: GoogleFonts.russoOne(
-                                  fontSize: 50,
-                                  color: GameTheme.secondryColor,
-                                  letterSpacing: 2,
-                                  height: 1.5,
-                                  fontWeight: FontWeight.bold,
+                                TextSpan(
+                                  text: "${widget.totalDiscoveredBombs}",
+                                  style: GoogleFonts.russoOne(
+                                    fontSize: 50,
+                                    color: GameTheme.secondryColor,
+                                    letterSpacing: 2,
+                                    height: 1.5,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ))),
+                              ],
+                            ))),
+                  ),
                   const SizedBox(height: 40),
                   OutlinedButton(
                     onPressed: widget.onExit,

@@ -214,7 +214,7 @@ class _GameScreenState extends State<GameScreen>
                       const Spacer(),
                       DisclaimerDialogWidget(),
                       const SizedBox(
-                        height: 20,
+                        height: 30,
                       ),
                     ],
                   ),
