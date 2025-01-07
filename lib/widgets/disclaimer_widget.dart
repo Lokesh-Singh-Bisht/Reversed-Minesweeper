@@ -35,6 +35,7 @@ class _DisclaimerDialogWidgetState extends State<DisclaimerDialogWidget> {
                       'Drag the pieces to empty spaces and find the MINES before they ',
                   style: GoogleFonts.russoOne(
                     fontSize: 16,
+                    letterSpacing: 1.2,
                     color: Colors.white,
                   ),
                 ),

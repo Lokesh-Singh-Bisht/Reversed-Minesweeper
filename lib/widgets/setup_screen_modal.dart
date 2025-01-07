@@ -54,7 +54,7 @@ class _SelectBoardWidgetState extends State<SelectBoardWidget> {
           ],
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
               padding: const EdgeInsets.all(10),
@@ -71,14 +71,15 @@ class _SelectBoardWidgetState extends State<SelectBoardWidget> {
                 ],
               ),
               child: Text(
-                'CHOOSE BOARD SIZE TO\nPLAY!',
+                'CHOOSE BOARD\nSIZE TO\nPLAY!',
                 style: GoogleFonts.russoOne(
                   fontSize: 24,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
                   shadows: const [
                     Shadow(
-                      blurRadius: 10,
+                      blurRadius: 5,
                       color: Colors.white,
                       offset: Offset(0, 0),
                     ),
@@ -87,26 +88,29 @@ class _SelectBoardWidgetState extends State<SelectBoardWidget> {
                 textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(height: 70),
-            FilledCustomButton(
-                onTap: () => navigateToGameScreen(6),
-                buttonColor: GameTheme.primaryColor,
-                buttonText: '6  x  6'),
-            const SizedBox(height: 20),
-            FilledCustomButton(
-                onTap: () => navigateToGameScreen(8),
-                buttonColor: GameTheme.primaryColor,
-                buttonText: '8  x  8'),
-            const SizedBox(height: 20),
-            FilledCustomButton(
-                onTap: () => navigateToGameScreen(10),
-                buttonColor: GameTheme.primaryColor,
-                buttonText: '10 x 10'),
-            const SizedBox(height: 20),
-            FilledCustomButton(
-                onTap: () => navigateToGameScreen(12),
-                buttonColor: GameTheme.primaryColor,
-                buttonText: '12 x 12'),
+            Column(
+              children: [
+                FilledCustomButton(
+                    onTap: () => navigateToGameScreen(6),
+                    buttonColor: GameTheme.primaryColor,
+                    buttonText: '6  x  6'),
+                const SizedBox(height: 20),
+                FilledCustomButton(
+                    onTap: () => navigateToGameScreen(8),
+                    buttonColor: GameTheme.primaryColor,
+                    buttonText: '8  x  8'),
+                const SizedBox(height: 20),
+                FilledCustomButton(
+                    onTap: () => navigateToGameScreen(10),
+                    buttonColor: GameTheme.primaryColor,
+                    buttonText: '10 x 10'),
+                const SizedBox(height: 20),
+                FilledCustomButton(
+                    onTap: () => navigateToGameScreen(12),
+                    buttonColor: GameTheme.primaryColor,
+                    buttonText: '12 x 12'),
+              ],
+            ),
           ],
         ),
       ),

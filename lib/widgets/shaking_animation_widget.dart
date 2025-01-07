@@ -10,7 +10,7 @@ class ShakingWidget extends StatefulWidget {
     Key? key,
     required this.child,
     this.duration = const Duration(milliseconds: 500),
-    this.shakes = 5,
+    this.shakes = 10,
     this.offset = 10.0,
   }) : super(key: key);
 

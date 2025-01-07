@@ -163,7 +163,9 @@ class _GameOverAnimationState extends State<GameOverAnimation>
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                  text: 'Bombs Discovered\n',
+                                  text: widget.totalDiscoveredBombs == 1
+                                      ? 'Bomb Discovered\n'
+                                      : 'Bombs Discovered\n',
                                   style: GoogleFonts.russoOne(
                                     fontSize: 18,
                                     color: GameTheme.primaryColor,
