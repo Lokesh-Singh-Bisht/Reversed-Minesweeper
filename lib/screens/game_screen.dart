@@ -12,6 +12,7 @@ import 'package:reversed_minesweeper/widgets/disclaimer_widget.dart';
 import 'package:reversed_minesweeper/widgets/explosion_component.dart';
 import 'package:reversed_minesweeper/widgets/game_over_animation.dart';
 import 'package:reversed_minesweeper/widgets/piece_widget.dart';
+import 'package:reversed_minesweeper/widgets/shaking_animation_widget.dart';
 
 import 'package:reversed_minesweeper/widgets/static_title_textWidget.dart';
 
@@ -212,7 +213,7 @@ class _GameScreenState extends State<GameScreen>
                             },
                           )),
                       const Spacer(),
-                      DisclaimerDialogWidget(),
+                      ShakingWidget(child: DisclaimerDialogWidget()),
                       const SizedBox(
                         height: 30,
                       ),

@@ -4,13 +4,6 @@ abstract class GameEvent {}
 
 class GameStartEvent extends GameEvent {}
 
-class BombDiscoveredEvent extends GameEvent {
-  final int row;
-  final int col;
-
-  BombDiscoveredEvent(this.row, this.col);
-}
-
 class BombExplodedEvent extends GameEvent {
   BombExplodedEvent();
 }
@@ -38,7 +31,5 @@ class PieceDroppedEvent extends GameEvent {
       required this.targetRow,
       required this.targetCol});
 }
-
-class StartTimerEvent extends GameEvent {}
 
 class CheckGameOverEvent extends GameEvent {}

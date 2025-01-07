@@ -1,3 +1,5 @@
+import 'package:flame_audio/flame_audio.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reversed_minesweeper/helpers/utilites.dart';
 import 'game_event.dart';
@@ -30,9 +32,10 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   }
 
   Future<void> startGame(GameStartEvent event, Emitter<GameState> emit) async {
-    emit(GameLoadingState(board: []));
     discoveredBombs = 0;
     board = [];
+    emit(GameLoadingState(board: []));
+
     if (gameTimer != null && gameTimer!.isActive) {
       gameTimer?.cancel();
     }
@@ -51,7 +54,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       ),
     );
 
-    // Place bombs
+    // Placing bombs on random cells.
     while (randomBombs > 0) {
       int row = random.nextInt(boardSize);
       int col = random.nextInt(boardSize);
@@ -61,7 +64,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       }
     }
 
-    // Place pieces on empty cells
+    // Place pieces on empty cells.
     while (piecesToPlace > 0) {
       int row = random.nextInt(boardSize);
       int col = random.nextInt(boardSize);
@@ -109,7 +112,6 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     cell.hasBomb = false;
     cell.isExploded = true;
     lg.d('Bomb exploded at : (${event.row},${event.col})');
-    emit(GameUpdatedState(board: board, discoveredBombs: discoveredBombs));
     add(CheckGameOverEvent());
   }
 
@@ -131,21 +133,27 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       PieceDroppedEvent event, Emitter<GameState> emit) async {
     if (board[event.targetRow][event.targetCol].hasBomb &&
         !board[event.targetRow][event.targetCol].isRevealed) {
-      // Bomb discovered
-      board[event.targetRow][event.targetCol].isRevealed = true;
-      discoveredBombs++;
+      FlameAudio.audioCache.load('bomb_discovered_sound.mp3');
+      FlameAudio.play('bomb_discovered_sound.mp3', volume: 0.3);
       lg.d(
           'Bomb discovered at : ${event.targetRow},${event.targetCol} \nBombs discovered : $discoveredBombs');
+
+      board[event.targetRow][event.targetCol].isRevealed = true;
+      discoveredBombs++;
+
       add(CheckGameOverEvent());
     }
 
     if (!board[event.targetRow][event.targetCol].hasPiece &&
         (!board[event.targetRow][event.targetCol].hasBomb ||
-            board[event.targetRow][event.targetCol].isRevealed)) {
-      // Move piece to new position
+            board[event.targetRow][event.targetCol].isRevealed) &&
+        !board[event.targetRow][event.targetCol].isExploded) {
+      // Drop piece to new position
       board[event.targetRow][event.targetCol].hasPiece = true;
       board[event.startRow][event.startCol].hasPiece = false;
+      emit(GameUpdatedState(board: board, discoveredBombs: discoveredBombs));
+    } else {
+      HapticFeedback.vibrate();
     }
-    emit(GameUpdatedState(board: board, discoveredBombs: discoveredBombs));
   }
 }
