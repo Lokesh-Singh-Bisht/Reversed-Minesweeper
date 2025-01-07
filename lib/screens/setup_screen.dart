@@ -29,7 +29,7 @@ class _SetupScreenState extends State<SetupScreen>
       end: const Offset(0.0, 0.1),
     ).animate(CurvedAnimation(
       parent: _controller,
-      curve: Curves.easeInOut,
+      curve: Curves.easeOutQuad,
     ));
 
     _containerSlideAnimation = Tween<Offset>(
@@ -37,7 +37,7 @@ class _SetupScreenState extends State<SetupScreen>
       end: const Offset(0.0, 0.0),
     ).animate(CurvedAnimation(
       parent: _controller,
-      curve: Curves.easeInOut,
+      curve: Curves.easeOutQuad,
     ));
 
     Future.delayed(const Duration(seconds: 4), () {

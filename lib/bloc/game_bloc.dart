@@ -74,7 +74,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       }
     }
     startTimer(emit);
-    emit(GameUpdatedState(board: board, discoveredBombs: discoveredBombs));
+    emit(GameUpdatedState(board: board));
   }
 
   void startTimer(Emitter<GameState> emit) {
@@ -103,7 +103,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       cell.hasExplodedAnimationPlayed = true;
     }
 
-    emit(GameUpdatedState(board: board, discoveredBombs: discoveredBombs));
+    emit(GameUpdatedState(board: board));
   }
 
   Future<void> explosionEndedEvent(
@@ -151,7 +151,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       // Drop piece to new position
       board[event.targetRow][event.targetCol].hasPiece = true;
       board[event.startRow][event.startCol].hasPiece = false;
-      emit(GameUpdatedState(board: board, discoveredBombs: discoveredBombs));
+      emit(GameUpdatedState(board: board));
     } else {
       HapticFeedback.vibrate();
     }

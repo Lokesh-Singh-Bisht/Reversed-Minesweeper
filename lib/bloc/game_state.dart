@@ -18,17 +18,18 @@ final class GameUpdatedState extends GameState {
   @override
   final List<List<Cell>> board;
 
-  final int discoveredBombs;
-  GameUpdatedState({required this.board, required this.discoveredBombs})
-      : super(board: board);
+  GameUpdatedState({
+    required this.board,
+  }) : super(board: board);
 }
 
 final class BombExplodedState extends GameState {
   @override
   final List<List<Cell>> board;
-  final int discoveredBombs;
-  BombExplodedState({required this.board, required this.discoveredBombs})
-      : super(board: board);
+
+  BombExplodedState({
+    required this.board,
+  }) : super(board: board);
 }
 
 final class GameOverState extends GameState {
