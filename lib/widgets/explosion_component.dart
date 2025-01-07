@@ -32,7 +32,6 @@ class ExplosionComponent extends SpriteAnimationComponent with HasGameRef {
 
   @override
   Future<void> onLoad() async {
-    FlameAudio.audioCache.load('explosion_sound.mp3');
     FlameAudio.play('explosion_sound.mp3', volume: 0.5);
     animation = await game.loadSpriteAnimation(
       'explosion.png',

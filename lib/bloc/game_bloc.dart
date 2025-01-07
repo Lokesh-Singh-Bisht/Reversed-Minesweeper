@@ -32,6 +32,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   }
 
   Future<void> startGame(GameStartEvent event, Emitter<GameState> emit) async {
+    FlameAudio.audioCache
+        .loadAll(['bomb_discovered_sound.mp3', 'explosion_sound.mp3']);
     discoveredBombs = 0;
     board = [];
     emit(GameLoadingState(board: []));
@@ -133,7 +135,6 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       PieceDroppedEvent event, Emitter<GameState> emit) async {
     if (board[event.targetRow][event.targetCol].hasBomb &&
         !board[event.targetRow][event.targetCol].isRevealed) {
-      FlameAudio.audioCache.load('bomb_discovered_sound.mp3');
       FlameAudio.play('bomb_discovered_sound.mp3', volume: 0.3);
       lg.d(
           'Bomb discovered at : ${event.targetRow},${event.targetCol} \nBombs discovered : $discoveredBombs');
